@@ -19,7 +19,7 @@ client.connect(err => {
   // perform actions on the collection object
   client.close();
 });*/
-
+// CONECCION CON CALLBACK
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert'); 
 // Connection URL
@@ -31,12 +31,14 @@ MongoClient.connect(url, (err, client)=> {
     assert.equal(null, err);
     console.log("Conneccion correcta al servidor\n"); 
     const db = client.db(dbName); 
-    let col = db.collection('producto');    
-    
+    let col = db.collection('producto');
     col.find({}).toArray((err, docs)=>{
         assert.equal(err, null);
-        console.log(docs);
-        
+        if(docs == null){
+          console.log("No hubo coneccion a la base de datos");
+        }else{
+          console.log(docs);
+        }
     client.close();
 });
 
